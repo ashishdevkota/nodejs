@@ -1,0 +1,136 @@
+create server
+http-> launches a server, send request
+https->launch a ssl server
+fs->file system
+
+
+***** creating server******
+ //import http functionality
+const http=require('http');
+const server=http.createServer((req,res)=>{
+    console.log(req.url,req.method,req.headers); //this helps to get info of request
+    // process.exit(); //quit process
+});
+server.listen(3000);//listen port 3000
+******end create server *****
+
+****send response ***
+//import http functionality
+const http=require('http');
+const server=http.createServer((req,res)=>{
+    console.log(req.url,req.method,req.headers);
+    // process.exit(); //quit process
+    res.setHeader('content-Type','text/html');
+    res.write('<html>');
+    res.write(' <h1> Hellow From Node js </h1>');
+    res.write('</html>');
+    res.end();
+});
+server.listen(3000);//listen port 3000
+****end of response****
+
+*******parsed request body*****
+//import http functionality
+const http=require('http');
+const fs=require('fs');
+const server=http.createServer((req,res)=>{
+    const url=req.url;
+    const method=req.method;
+    if(url==='/'){
+        res.write('<html>');
+        res.write('<head><title>Enter Message</title> </head>');
+        res.write('<body> <form action="/message" method="post"><input type="text" name="message"><button type="submit"> Send</button></form></body>')
+        res.write('</html>');
+        return res.end();
+    }
+    if(url==='/message' && method==='POST'){
+        const body=[]; //creating empty array
+        req.on('data',(chunk)=>{
+            console.log(chunk)
+          body.push(chunk);
+        });
+        req.on('end',()=>{
+         const parsedBody=Buffer.concat(body).toString();
+         const message=parsedBody.split('=')[1];
+         fs.writeFileSync('message.txt',message); //creating file message.txt then writing on it
+      
+        });
+      res.statusCode=302;
+       res.setHeader('Location','/');
+       return res.end();
+
+    }
+    res.setHeader('Content-Type','text/html');
+    res.write('<html>');
+    res.write('<h1>Hellow from node</h1>');
+     res.write('</html>');
+     res.end();
+});
+server.listen(3000);//listen port 3000
+
+****end ****
+
+
+****import ,Export and module systemin node js****8
+on app.js:
+//import http functionality
+const http=require('http');
+
+const route=require('./route'); //importing from route.js 
+
+const server=http.createServer(route);
+server.listen(3000);//listen port 3000
+
+
+
+
+on route.js:
+
+const fs=require('fs');
+
+const requestHandler=(req,res)=>{
+const method=req.method;
+const url=req.url;
+    if(url==='/'){
+        res.write('<html>');
+        res.write('<head><title>Enter Message</title> </head>');
+        res.write('<body> <form action="/message" method="post"><input type="text" name="message"><button type="submit"> Send</button></form></body>')
+        res.write('</html>');
+        return res.end();
+    }
+    if(url==='/message' && method==='POST'){
+        const body=[]; //creating empty array
+        req.on('data',(chunk)=>{
+            console.log(chunk)
+          body.push(chunk);
+        });
+        return req.on('end',()=>{
+         const parsedBody=Buffer.concat(body).toString();
+         const message=parsedBody.split('=')[1];
+         fs.writeFile('message.txt',message,(err)=>{
+            res.statusCode=302;
+            res.setHeader('Location','/');
+            return res.end();
+         }); //creating file message.txt then writing on it
+         
+        }); 
+      
+
+    }
+    res.setHeader('Content-Type','text/html');
+    res.write('<html>');
+    res.write('<h1>Hellow from node</h1>');
+     res.write('</html>');
+     res.end();
+
+};
+
+ //3 ways to export
+
+// module.exports=requestHandler;
+
+module.exports={
+handler:requestHandler,
+someText:'Some hard coded text'
+}
+

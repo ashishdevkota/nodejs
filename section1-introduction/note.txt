@@ -1,0 +1,18 @@
+node js is a javascript runtime built on chrome's v8 javascript engine
+written in c++
+
+create new file using node:
+const fs=require('fs');
+fs.writeFileSync('hellow.txt','Hellow form node js');
+
+
+working with repel and using file:
+Repel-> Read input
+        Evaluate user data
+        print output
+        loop wait for new input
+
+execite file->
+used for real app
+predictable sequence of step
+

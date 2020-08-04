@@ -1,0 +1,42 @@
+javascript - quick refresher
+
+datatype-> string,number,boolean and function
+
+
+use of let and const for creating variable
+let ->  value can be change later
+const-> value cannot change later
+
+arrow function
+working with obj,properties &method
+array, map method
+
+spread operator->(...)-symbol   
+useconst createCopy=[...hobbies];
+
+rest operator-> same like spread (...)
+used tobind miltiple arguments to arrray
+const toArray=(...args)=>{
+    return args;
+}
+
+destructuring syntax;
+
+//destructure syntax
+ const printName= ({name})=>{
+     console.log(name)
+ }
+ printName(person)
+
+
+const {name,age}=person;
+console.log(name,age)
+
+
+//array destructure
+const [hobbies1,hobbies2]=hobbies;
+console.log(hobbies1,hobbies2)
+
+
+//asyncronous call back &promise
+

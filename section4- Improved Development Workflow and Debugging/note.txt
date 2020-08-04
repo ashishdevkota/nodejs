@@ -1,0 +1,59 @@
+*****Understanding NPM Scripts****
+npm init -> get package.json file (npm is precombined with node);
+
+add on script:
+"start":"node app.js",
+    "start-server":"node app.js"
+    then on terminal:
+    npm start/ npm run start-server
+
+
+***** Installing 3rd Party Packages****
+$ npm install nodemon --save-dev
+
+
+**** Using Nodemon for Autorestarts***
+change npm start on script to:
+"start": "nodemon app.js",
+
+$$$$on ward use npm start
+
+*****Understanding different Error Types******
+syntax error, runtime error, logic error
+
+****Finding & Fixing Syntax Errors***
+when error occur there is thrown error with line number on terminal
+those are simple to find and Fixing
+
+******* Dealing with Runtime Errors******
+res.write like problem
+error message will be thrown on termainal
+
+
+******* Logical Errors****
+error with logics
+us vsc debugger
+select break point then start debugging
+use controller to move /control
+
+
+****** Using the Debugger****
+use stepover from dubugger controller to view steps followed
+
+
+*****12. Restarting the Debugger Automatically After Editing our App***
+explorer/run/add configuration
+add below code on json:
+  "restart": true,
+            "runtimeExecutable": "nodemon",
+            "console": "integratedTerminal"
+
+
+ *************Changing Variables in the Debug Console*****
+ run dubugging after seting break point then double click on variables to change  value
+
+
+
+
+
+
